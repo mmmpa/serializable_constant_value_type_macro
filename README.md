@@ -7,7 +7,7 @@ Define types witch are serialized into constant string anytime.
 ```rust
 use serde::{Serialize, Serializer};
 
-define_constant_value!(
+define_serializable_constant_value_type!(
     MarkdownValue => "mrkdwn",
     FiveFiveFiveTo => 666,
 );

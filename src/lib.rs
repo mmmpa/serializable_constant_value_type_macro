@@ -1,5 +1,5 @@
 #[macro_export]
-macro_rules! define_constant_value {
+macro_rules! define_serializable_constant_value_type {
     ( $($name:tt => $value:tt,)* ) => { $(
         #[derive(Debug, Default)]
         pub struct $name;
@@ -22,7 +22,7 @@ macro_rules! define_constant_value {
 pub mod tests {
     use serde::{Serialize, Serializer};
 
-    define_constant_value!(
+    define_serializable_constant_value_type!(
         MarkdownValue => "mrkdwn",
         FiveFiveFiveTo => 666,
     );
