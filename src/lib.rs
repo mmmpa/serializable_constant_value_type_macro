@@ -1,6 +1,6 @@
 #[macro_export]
 macro_rules! define_serializable_constant_value_type {
-    ( $($name:tt => $value:tt,)* ) => { $(
+    ( $($name:tt => $value:tt),* $(,)?) => { $(
         #[derive(Debug, Default)]
         pub struct $name;
 
@@ -13,9 +13,6 @@ macro_rules! define_serializable_constant_value_type {
             }
         }
     )* };
-    ( $($name:tt => $value:tt),* ) => { $(
-        define_constant_value!($name => $value,);
-    )* };
 }
 
 #[cfg(test)]
@@ -23,8 +20,9 @@ pub mod tests {
     use serde::{Serialize, Serializer};
 
     define_serializable_constant_value_type!(
-        MarkdownValue => "mrkdwn",
-        FiveFiveFiveTo => 666,
+           MarkdownValue => "mrkdwn",
+           FiveFiveFiveTo => 666,
+           NoComma => "no_comma"
     );
 
     #[derive(Default, Serialize)]
