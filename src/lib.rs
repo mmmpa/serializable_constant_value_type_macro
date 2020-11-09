@@ -1,7 +1,7 @@
 #[macro_export]
 macro_rules! define_serializable_constant_value_type {
     ( $($name:tt => $value:tt),* $(,)?) => { $(
-        #[derive(Debug, Default)]
+        #[derive(Deserialize, Debug, Default)]
         pub struct $name;
 
         impl Serialize for $name {
@@ -15,9 +15,13 @@ macro_rules! define_serializable_constant_value_type {
     )* };
 }
 
+pub mod prelude {
+    pub use serde::{Deserialize, Serialize, Serializer};
+}
+
 #[cfg(test)]
 pub mod tests {
-    use serde::{Serialize, Serializer};
+    use crate::prelude::*;
 
     define_serializable_constant_value_type!(
            MarkdownValue => "mrkdwn",
